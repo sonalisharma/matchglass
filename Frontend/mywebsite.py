@@ -52,76 +52,112 @@ def getuser():
     if request.method == 'POST':
         #try:
         print "I am here"
-        name = request.form['fname']
+        name = request.form['txt_name']
         print name
-        #name = "SonaliTest"
-       # print name
-        #print request.form['txt_name']
-        #print email
-        #email = request.form['txt_email']
-        radio  = "1"
+        radio  = request.form['group1']
         colorbox = request.form['color']
         print colorbox
         data = [] 
         #name= "dummyuser"
         data.append(name)
         data.append("active")
-        data.append(radio)
         data.append(colorbox)
         data.append("follow")
         data.append("matchpin")
         data.append("expinterest")
+        data.append(radio)
         data.append("test@abc.com")
-        print data
+        active_users = getusers()
+        print len(active_users)
+        if len(active_users)>=3:
+            updateuser()
         matchdata = Matchglass(str(data[0]),str(data[1]),str(data[2]),str(data[3]),str(data[4]),str(data[5]),str(data[6]),str(data[7]))
         db.session.add(matchdata)
         db.session.commit()
-        #print active_users
-        #except Exception,e:
-        #    flag = "failure"
-        #    print e
         return redirect(url_for('makematch')) 
     return render_template('main.html',options=options)
 
 def getusers():
     con =  eng.connect()
-    query_template = "select * from Matchglass WHERE status = active"
-    active_users = con.execute(query)
-    return active_users
+    query_template = "select * from matchglass WHERE status = 'active'"
+    active_users = con.execute(query_template)
+    return active_users.fetchall()
 
+def updateuser():
+    print "Inside commit"
+    con =  eng.connect()
+    rows_changed = Matchglass.query.filter_by(status='active').update(dict(status='inactive'))
+    db.session.commit()
 
 @app.route('/makematch')
 def makematch():
-    users = getusers
-    return render_template('makematch.html')
+    users = getusers()
+    print users
+    return render_template('makematch.html',users=users)
+
+@app.route('/expressinterest',methods=['GET', 'POST'])
+def expressinterest():
+    users=[]
+    if request.method == 'POST':
+        users = request.form.getlist('user')
+        print "------"
+        print len(users)
+        print users
+        print "------"
+        if len(users)==1:
+            rows_changed = Matchglass.query.filter_by(id=users[0].split("_")[0],status='active').update(dict(expressinterest=users[0].split("_")[1]))
+        else:
+            rows_changed = Matchglass.query.filter_by(id=users[0].split("_")[0],status='active').update(dict(expressinterest=users[0].split("_")[1]))
+            rows_changed = Matchglass.query.filter_by(id=users[1].split("_")[0],status='active').update(dict(expressinterest=users[1].split("_")[1]))
+        db.session.commit()
+    return render_template('main.html',options=["Bird","Face"])
+
+
+@app.route('/updatematch',methods=['GET', 'POST'])
+def updatematch():
+    users=[]
+    con = eng.connect()
+    if request.method == 'POST':
+        users = request.form.getlist('user')
+        print "------"
+        print users
+        print "------"
+        rows_changed = Matchglass.query.filter_by(id=users[0]).update(dict(matchpin='1'))
+        rows_changed = Matchglass.query.filter_by(id=users[1]).update(dict(matchpin='1'))
+        db.session.commit()
+    query_template = "select * from matchglass WHERE id in ({})".format(",".join(users))
+    print query_template
+    active_users = con.execute(query_template)
+    users = active_users.fetchall()
+    temp = users
+    retval =[]
+    row = (str(temp[0][0])+"_"+str(temp[1][0]) , users[0])
+    retval.append(row)
+    row = (str(temp[1][0])+"_"+str(temp[0][0]) , users[1])
+    retval.append(row)
+    print retval
+    return render_template('expressinterest.html',users=retval)
 
 @app.route('/user/<name>')
 def thanks(name):
     message = "Thanks! Collect your glass and prepare to find your match."
     return render_template('thankyou.html',status = message)
 
-@app.route('/upload', methods=['GET', 'POST'])
-def upload():
-    print "I am in upload"  
-    try:
-        data = [] 
-        data.append(name)
-        data.append("active")
-        data.append(radio)
-        data.append(colorbox)
-        data.append("follow")
-        data.append("matchpin")
-        data.append("expinterest")
-        data.append(email)
-        print data
-        matchdata = Matchglass(str(data[0]),str(data[1]),str(data[2]),str(data[3]),str(data[4]),str(data[5]),str(data[6]),str(data[7]))
-        db.session.add(matchdata)
-        db.session.commit()
-    except Exception,e:
-        flag = "failure"
-        print e
-    
-    return redirect(url_for('thanks',name="dummy"))
+@app.route('/check', methods=['GET', 'POST'])
+def checkinterest():
+    data="Checking"
+    if request.method == 'POST':
+        users = request.form['txt_user']
+        con = eng.connect()
+        query = con.execute("select * from matchglass where expressinterest=(select id from matchglass where name='{}')".format(users))
+        print query
+        result = query.fetchall()
+        print result
+        if len(result)>0:
+            data = result[0][1]+" expressed interest in you :)"
+        else:
+            data = "Sorry your date did not express interest"
+    return render_template('thankyou.html',data=data)
 if __name__ == "__main__":
     global name
     global email

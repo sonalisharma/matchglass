@@ -1,5 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>{{status}}</h1><br>
+<form id="form_check" method="post" action="/check">
+	<label for="idfname">Your Name: </label>
+	<input type="text" name="txt_user" id="txt_user">
+	<p><button type="Submit" >Submit</button></p>
+</form>
+
+<h1>{{data}}</h1><br>
 <!--<input type="button" name="btn_insert_coll" value = 'Insert a Collection'> -->
 {% endblock %}

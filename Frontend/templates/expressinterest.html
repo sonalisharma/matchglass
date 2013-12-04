@@ -2,7 +2,7 @@
 {% block content %}
     <h1>Match Glass</h1>
     <p>Pick the users (to be filled by admin)</p>
-    <form id="form_users" method="post" action="/updatematch">
+    <form id="form_expint" method="post" action="/expressinterest">
     {% for u in users %}
 		    	<input type="checkbox" name="user" value={{ u[0]}}>{{u[1]}}<br>
     {% endfor %}
