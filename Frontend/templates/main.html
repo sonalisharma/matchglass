@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Match Glass</h1>
+    <div class="content">
+    
+	   <form id="form_oz" method="post" action="/">
+		    <div id="left">
+		    	<img style="height:350px ;width:350px;"src="static/img/ror9.jpg"/>    
+		    </div>
+		    <div id ="right">
+		    	<div id = "question">
+		        	<h2>
+		        		<label for="idfname">Your Name: </label>
+		        		<input type="text" name="fname" id="idfname">
+		        	</h2>
+		        	<p><label>What does this look like?</label></p>
+				    <input type="radio" name="group1" value="value1"> {{ options[0] }}<br>
+					<input type="radio" name="group1" value="value2" checked> {{ options[1] }}<br>
+					<p><button type="button" id="button">Click</button></p>	
+				</div>
+				<div id="statusmsg">
+					<h1>Thanks! Collect your glass and prepare to find your match.</h1>
+				</div>	
+		    </div>
+		    <div id="colors">
+		    	<p>Pick the color (to be filled by admin)</p>
+		    	<input type="checkbox" name="color" value="Red">Red<br>
+				<input type="checkbox" name="color" value="Blue">Blue<br>
+				<input type="checkbox" name="color" value="Green">Green<br>
+				<p><button type="Submit" >Submit</button></p>
+		    </div>
+	   
+	   
+		</form>
+    
+	</div>
+{% endblock %}
