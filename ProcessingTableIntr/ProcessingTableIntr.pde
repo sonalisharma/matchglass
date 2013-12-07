@@ -107,6 +107,7 @@ void setup() {
 }
 
 void draw() {
+  
   if(val1 == 0 && val2 == 0)
     {
       if(quesloc!=-2)
@@ -126,6 +127,31 @@ void draw() {
   //text(newques,width/3,40);  
 }
 
+int GetNewVal(int val)
+{
+  if(val == 1) 
+  {
+    return 2;
+  }
+  else if(val == 2)
+  {
+    return 1;
+  }
+  
+  else if(val == 3)
+  {
+    return 4;
+  }
+  
+  else if(val == 4)
+  {
+    return 3;
+  }
+  
+  return val;
+
+}
+
 void clearScreen(int val1, int val2) {
   //if ((val1!=1 || val1!=2 || val1!=3 || val1!=4 || val1!= 0 ) && (val2!=1 || val2!=2 || val2!=3 || val2!=4 || val2!= 0)) {
   //  background(40,40,40);  // erase screen
@@ -136,7 +162,9 @@ void clearScreen(int val1, int val2) {
 int textdisplay(int val1, int val2)
 {
   println("This is  inside rthe text method, just reached here:"+val1);
-
+  val1 = GetNewVal(val1);
+  val2 = GetNewVal(val2);
+  
   if(true)
   {
       //int size = (int)(((20.0/225.0)*(float)val)+20.0);
