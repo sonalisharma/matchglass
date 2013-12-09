@@ -1,4 +1,4 @@
-body            { font-family: sans-serif; background: #eee; }
+body            { font-family: sans-serif; background: #fafafa; }
 a, h1, h2       { color: #377ba8; }
 h1, h2          { font-family: 'Georgia', serif; margin: 0; }
 h1              { border-bottom: 2px solid #eee; }
@@ -8,9 +8,7 @@ h2              { font-size: 1.2em; }
 .main_urls a 	{padding:20px;
 				 margin-top:30px;
 				}
-.main_urls      {padding: 20px;]
-
-				}
+.main_urls      {padding: 20px;}
 .content		{width:90%; padding:10px; height:auto;}
 
 .page           { margin: 2em auto; width: 35em; border: 5px solid #ccc;
@@ -27,5 +25,179 @@ h2              { font-size: 1.2em; }
                   border: 1px solid #aacbe2; }
 .error          { background: #f0d6d6; padding: 0.5em; }
 #colors 		{margin-top:50px;display:none;}
-#left 			{display:block;float:left;width:50%;}
-#right 			{display:block;}
+#left 			{display:block;float:left;width:500px;}
+#right 			{display:block; margin:0 20px; float:left;}
+
+
+/* Shreyas styles */
+
+/*
+** MODULE:: all;
+*/
+
+/*fonts*/
+@font-face{    
+  font-family: 'OpenSans Regular';
+  src: url('../resources/fonts/opensans/opensans_regular.ttf') format('truetype'); 
+}
+@font-face{    
+  font-family: 'OpenSans Bold';
+  src: url('../resources/fonts/opensans/opensans_bold.ttf') format('truetype'); 
+}
+@font-face{    
+  font-family: 'OpenSans Bold Italic';
+  src: url('../resources/fonts/opensans/opensans_bold_italic.ttf') format('truetype'); 
+}
+@font-face{    
+  font-family: 'OpenSans Extra Bold';
+  src: url('../resources/fonts/opensans/opensans_extra_bold.ttf') format('truetype'); 
+}
+@font-face{    
+  font-family: 'OpenSans Extra Bold Italic';
+  src: url('../resources/fonts/opensans/opensans_extra_bold_italic.ttf') format('truetype'); 
+}
+@font-face{    
+  font-family: 'OpenSans Italic';
+  src: url('../resources/fonts/opensans/opensans_italic.ttf') format('truetype'); 
+}
+@font-face{    
+  font-family: 'OpenSans Light';
+  src: url('../resources/fonts/opensans/opensans_light.ttf') format('truetype'); 
+}
+@font-face{    
+  font-family: 'OpenSans Light Italic';
+  src: url('../resources/fonts/opensans/opensans_light_italic.ttf') format('truetype'); 
+}
+@font-face{    
+  font-family: 'OpenSans Semi Bold';
+  src: url('../resources/fonts/opensans/opensans_semibold.ttf') format('truetype'); 
+}
+@font-face{    
+  font-family: 'OpenSans Semi Bold Italic';
+  src: url('../resources/fonts/opensans/opensans_semibold_italic.ttf') format('truetype'); 
+}
+
+
+
+
+body{
+    background: rgb(236, 240, 241);
+    font-family: 'OpenSans Light', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5em;
+    color:#333;
+}
+
+
+
+
+/*div*/
+.wrapper{
+	float:none;
+	width:960px;
+	margin:0 auto;
+	position:relative;
+}
+
+
+	header{
+
+		position:absolute;
+		top:100px;
+		left:10%;
+	}
+
+		#headcaption{
+			margin:0 200px;
+			float:left;
+			clear:both;
+			color: #c21878;
+		}
+
+		#creators{
+			float:left;
+			clear:both;
+			margin:120px 0 0 100px;
+			color:#666666;
+		}
+
+
+	h1{
+		text-align: center;
+		margin: 12px 0;
+		font-family: 'Rouge Script', cursive;
+		font-size:70px;
+		color: #c21878;
+		float:left;
+		
+	}
+	/* figure */
+	#pict-glass{
+		margin: 0 30px;
+		float:left;
+	}
+
+	hr{
+		border:1px dashed #bfbfbf;
+		margin:20px 0;
+		float:left;
+		width:100%;
+	}
+	/*div*/
+	.content{
+		clear:both;
+		float:left;
+		width: 100%;
+	}
+
+		/*img*/
+		.imgframe{
+			border:1px solid #bfbfbf;
+		}
+
+
+	
+	#question{
+		
+		font-size: 20px;
+	}
+
+	#userques{
+		font-size:24px;
+		font-family: 'OpenSans Bold', sans-serif;
+	}
+
+
+	#left{
+		 -moz-box-shadow:    0px 0px 5px 5px #ccc;
+		  -webkit-box-shadow: 0px 0px 5px 5px #ccc;
+		  box-shadow:         0px 0px 5px 5px #ccc;
+
+
+  -webkit-transition: all 0.3s ease-out; 
+     -moz-transition: all 0.3s ease-out; 
+       -o-transition: all 0.3s ease-out; 
+          transition: all 0.3s ease-out; 
+          cursor: pointer;
+
+	}
+
+	#left:hover{
+		-moz-box-shadow:    0px 0px 10px 10px #ffe7f1;
+		  -webkit-box-shadow: 0px 0px 10px 10px #ffe7f1;
+		  box-shadow:         0px 0px 10px 10px #ffe7f1;
+
+
+  -webkit-transform: scale(1.03); 
+     -moz-transform: scale(1.03); 
+      -ms-transform: scale(1.03); 
+       -o-transform: scale(1.03); 
+          transform: scale(1.03); 
+	
+	}
+		
+	#form_oz{
+		float:left;
+		margin:0 0 200px 0;
+	}
+

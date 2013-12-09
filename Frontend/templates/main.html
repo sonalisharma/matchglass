@@ -1,11 +1,19 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Match Glass</h1>
+	<header>
+	    <h1>Match Glass</h1>
+	    <p id="headcaption">A TUI Class Project</p>
+	    <p id="creators">By: Sonali Sharma, Divya Anand, Vaidy, Shreyas</p>
+	</header>
+    <figure id="pict-glass">
+    	<img src="static/img/wineglass2.png" />
+    </figure>
+    <hr>
     <div class="content">
     
 	   <form id="form_oz" method="post" action="/">
-		    <div id="left">
-		    	<img style="height:350px ;width:350px;"src="static/img/ror9.jpg"/>    
+		    <div id="left" class="imgframe">
+		    	<img width="500" src="static/img/ror9.jpg"/>    
 		    </div>
 		    <div id ="right">
 		    	<div id = "question">
@@ -13,7 +21,7 @@
 		        		<label for="idfname">Your Name: </label>
 		        		<input type="text" name="txt_name" id="txt_name">
 		        	</h2>
-		        	<p><label>What does this look like?</label></p>
+		        	<p id="userques"><label>Q: What does this picture look like?</label></p>
 				    <input type="radio" name="group1" value="value1"> {{ options[0] }}<br>
 					<input type="radio" name="group1" value="value2" checked> {{ options[1] }}<br>
 					<p><button type="button" id="button">Click</button></p>	
