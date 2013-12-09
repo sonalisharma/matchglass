@@ -4,7 +4,6 @@ $( document ).ready(function() {
   var fname = "";
   var bird_face = "";
 $( "#button" ).click(function() {
-	alert("I am inside in the button loop");
 	$( "#left" ).css("display","none");
 	$( "#question" ).css("display","none");
 	$( "#statusmsg" ).show(300);

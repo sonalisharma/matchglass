@@ -64,11 +64,11 @@ String[] questions = {
 
 "For my next trick, I will pull ##### out of _____",
 
-"I learned the hard way that you cannot cheer up ##### with _____",
+"I learned that you cannot cheer up ##### with _____",
 
 "Before I kill you #####, I must show you _____",
 
-"Every Christmas, my ##### gets drunk and tells stories about _____",
+"Every Christmas, my ##### gets drunk & tells stories about _____",
 
 "My gym teacher got fired for adding ##### to _____"
 
@@ -171,11 +171,11 @@ int textdisplay(int val1, int val2)
       //println("SIZE:"+size);
       String ans1 = "";
       String ans2 = "";
-      int size = 20;
+      int size = 32;
       f = createFont("Arial",size,true); 
       textFont(f);       
       fill(255);
-      textAlign(CENTER);    
+      //textAlign(CENTER);    
       //Queston display
       String newques = "";       
       fill(251);
@@ -222,13 +222,28 @@ int textdisplay(int val1, int val2)
       //text(newques,width/3,40);  
       temp = newques.split("\\s+");
      //  temp = questions[quesloc].split("\\s+");
-
-      int initloc = 50;
+      float xinit = 100.0;
+      float buffer = 0.0;
+      int initloc = 150;
+      int transloc = 0;
       //questions[quesloc].replace("_____",answers[index]);
-      pushMatrix();
+      
       for (int z=0; z<temp.length;z++)
       {
+        if (z%3==0 && z!=0)
+        {    
+          resetMatrix(); 
+          initloc = initloc+50;
+          //float tmpxinit = xinit;
+          xinit = 100.0;
+          translate(xinit,initloc);
+          
+        }
         //initloc = initloc+50;
+        if (z==0)
+        {
+          translate(xinit,initloc);
+        }
         if (temp[z].equals("#####"))
         {
           //println("initloc="+initloc);
@@ -239,20 +254,24 @@ int textdisplay(int val1, int val2)
           
           if(val1 != 0)
           {
-           // text(answers1[index1],width/3,initloc);
-           translate(textWidth(answers1[index1]),initloc);
-           text(answers1[index1],0,0 );
+           //text(answers1[index1],width/3,initloc);
+           //translate(textWidth(answers1[index1]),transloc); 
+           xinit = xinit + textWidth(answers1[index1]) + buffer;
+           //text(answers1[index1],xinit,initloc );
+           text(answers1[index1],0,0);
+           translate(xinit,0);
            
            //translate(textWidth(answers1[index1]),initloc);
-           
-            
           }
           else
           {
             //text("_____",width/3,initloc);
             
-            translate(textWidth("_____"),initloc);
+            //translate(textWidth("_____"),transloc);
+            xinit = xinit + textWidth("_____") + buffer;
+            
             text("_____",0,0);
+            translate(xinit,0);
             
             
           }
@@ -271,37 +290,34 @@ int textdisplay(int val1, int val2)
           if(val2 != 0)
           {
             //text(answers2[index2],width/3,initloc);
-            translate(textWidth(answers2[index2]),initloc);
+            //translate(textWidth(answers2[index2]),transloc);
+            xinit = xinit + textWidth(answers2[index2]) + buffer;
             text(answers2[index2],0,0);
-           
-            
+            translate(xinit,0);
+          
           }
           else
           {
             //text(temp[z],width/3,initloc);
-            translate(textWidth("_____"),initloc);
+            //translate(textWidth("_____"),transloc);
+            xinit= xinit + textWidth("_____") + buffer;
             text("_____",0,0);
+            translate(xinit,0);
           }
         }
         
         else
         {
           fill(255,0,0);
-          translate(textWidth(temp[z]),initloc);
+          //translate(textWidth(temp[z]),transloc);
+          xinit = xinit + textWidth(temp[z]) + buffer;
           text(temp[z],0,0);
+          translate(xinit,0);
           //initloc = initloc+10+temp[z].length()*5;
         }
       } 
-      popMatrix();
+      //popMatrix();
   
-      //text(questions[quesloc].replace("_____","<"+answers[index]+">"),width/3,70,100,100); 
-     // String s = newques;
-      //fill(255,0,0);
-      //text(s, width/3, 40, 250, 250);  // Text wraps within text box
-      
-      //text(questions[quesloc].replace("_____","<"+answers[index]+">"), 10, 10, 70, 80); 
-      //text(questions[quesloc].replace("_____",answers[index]),10, 10, 70, 80); 
-      //background(40,40,40);
       return 1;
   }
   
@@ -336,6 +352,8 @@ void serialEvent(Serial p) {
     buf2 = "";
     
     println("Just before textdisplay:"+val1);
+    println("Text width:"+textWidth("i"));
+
     //textdisplay(val1,val2);
   }
 }

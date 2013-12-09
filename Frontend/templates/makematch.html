@@ -4,7 +4,7 @@
     <p>Pick the users (to be filled by admin)</p>
     <form id="form_users" method="post" action="/updatematch">
     {% for u in users %}
-		    	<input type="checkbox" name="user" value={{ u[0]}}>{{u[1]}}<br>
+		    	<input type="checkbox" name="user" value={{ u[0]}}>{{ u[1] }} ({{ u[3] }})<br>
     {% endfor %}
     <p><button type="Submit" >Submit</button></p>
 	</form>
