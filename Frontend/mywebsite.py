@@ -149,9 +149,10 @@ def checkinterest():
     if request.method == 'POST':
         users = request.form['txt_user']
         con = eng.connect()
-        query = con.execute("select * from matchglass where expressinterest=(select id from matchglass where name='{}')".format(users))
+        query = "select * from matchglass where expressinterest=(select id from matchglass where name='{}' and status='active')".format(users)
         print query
-        result = query.fetchall()
+        query_exe = con.execute(query)
+        result = query_exe.fetchall()
         print result
         if len(result)>0:
             data = result[0][1]+" expressed interest in you :)"
